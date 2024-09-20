@@ -1,6 +1,6 @@
 {
-  "name": "@bonfida/token-vesting",
-  "version": "0.0.9",
+  "name": "@larskarbo/bonfida-token-vesting",
+  "version": "0.0.10",
   "license": "MIT",
   "repository": {
     "type": "git",
