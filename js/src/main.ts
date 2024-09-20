@@ -17,7 +17,6 @@ import {
   createUnlockInstruction,
 } from './instructions';
 import { ContractInfo, Schedule } from './state';
-import { assert } from 'console';
 import bs58 from 'bs58';
 
 /**
@@ -215,10 +214,12 @@ export async function changeDestination(
 
   const contractInfo = await getContractInfo(connection, vestingAccountKey);
   if (!newDestinationTokenAccount) {
-    assert(
-      !!newDestinationTokenAccountOwner,
-      'At least one of newDestinationTokenAccount and newDestinationTokenAccountOwner must be provided!',
-    );
+    if (!newDestinationTokenAccountOwner) {
+      throw new Error(
+        'At least one of newDestinationTokenAccount and newDestinationTokenAccountOwner must be provided!',
+      );
+    }
+
     newDestinationTokenAccount = await getAssociatedTokenAddress(
       contractInfo.mintAddress,
       newDestinationTokenAccountOwner!,
